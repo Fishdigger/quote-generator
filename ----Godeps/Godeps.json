@@ -1,9 +1,0 @@
-{
-	"ImportPath": "github.com/Fishdigger/quote-generator",
-	"GoVersion": "go1.9",
-	"GodepVersion": "v79",
-	"Packages": [
-		"./..."
-	],
-	"Deps": []
-}
