@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Fishdigger/quote-generator/src/database"
@@ -17,11 +16,8 @@ type getQuoteHandler struct {
 }
 
 func (handler getQuoteHandler) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
-	dbSession, err := database.OpenSession()
-	if err != nil {
-		fmt.Println("Problems parsing here!!!!", err)
-		panic(err)
-	}
+	dbSession := database.OpenSession()
 	defer database.CloseSession(dbSession)
+
 	responseWriter.Write([]byte(`Hello World from getQuote Service!!!!` + handler.clientEmail))
 }

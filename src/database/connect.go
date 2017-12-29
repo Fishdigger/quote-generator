@@ -2,6 +2,7 @@ package database
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net"
 	"os"
 
@@ -9,9 +10,7 @@ import (
 )
 
 //OpenSession ... returns an open session with the database
-func OpenSession() (*mgo.Session, error) {
-	//dbURL := os.Getenv("DB_URL")
-	//dialInfo, err := mgo.ParseURL(dbURL)
+func OpenSession() *mgo.Session {
 	dialInfo := &mgo.DialInfo{
 		Addrs: []string{os.Getenv("DB_PREFIX0"),
 			os.Getenv("DB_PREFIX1"),
@@ -28,8 +27,12 @@ func OpenSession() (*mgo.Session, error) {
 	}
 	session, err := mgo.DialWithInfo(dialInfo)
 
-	//	sess, err := mgo.Dial(dbURL)
-	return session, err
+	if err != nil {
+		fmt.Println("Problems connecting to database!!!!", err)
+		panic(err)
+	}
+
+	return session
 }
 
 //CloseSession ... closes the session with the db
