@@ -1,1 +1,1 @@
-web: quote-generator-api
+web: quote-generator
