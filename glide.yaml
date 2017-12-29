@@ -1,0 +1,3 @@
+package: github.com/Fishdigger/quote-generator
+import: 
+  - package: gopkg.in/mgo.v2 
