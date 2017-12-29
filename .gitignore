@@ -21,3 +21,5 @@ debug
 vendor
 
 launch.json
+
+.DS_Store
