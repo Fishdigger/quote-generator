@@ -3,17 +3,27 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	addr, err := determineListenAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	http.HandleFunc("/", func(responseWriter http.ResponseWriter, request *http.Request) {
 		responseWriter.Write([]byte("Hello, World!!! from api"))
 	})
 
 	http.Handle("/special", &helloWorldHandler{message: "Tenting this!!!"})
 
-	http.ListenAndServe(":4000", nil)
+	log.Printf("Listening on %s...\n", addr)
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		panic(err)
+	}
 }
 
 type helloWorldHandler struct {
@@ -33,4 +43,12 @@ func (handler helloWorldHandler) ServeHTTP(responseWriter http.ResponseWriter, r
 	}
 
 	responseWriter.Write([]byte(`Hello World from struct!!!!` + handler.message))
+}
+
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
 }
