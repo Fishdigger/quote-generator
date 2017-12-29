@@ -13,7 +13,7 @@
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
 .env
-.vscode/launch.json
+.vscode
 
 debug
 vendor
