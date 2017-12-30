@@ -1,6 +1,13 @@
-hash: cbaa127b6ce5d815afde438e8a3bd1b388c90c532ddb3a8db12e57408afd3fdf
-updated: 2017-12-29T00:20:51.484642392-05:00
+hash: daee31103b8485eddb56bfde01c9224defded0096d2a64b5b905e6e87ae96419
+updated: 2017-12-29T23:48:36.656539422-05:00
 imports:
+- name: github.com/gorilla/mux
+  version: 5ab525f4fb1678e197ae59401e9050fa0b6cb5fd
 - name: gopkg.in/mgo.v2
   version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
 testImports: []

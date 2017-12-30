@@ -9,12 +9,17 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
+// DBNAME the name of the DB instance
+var DBNAME = os.Getenv("DB_NAME")
+
 //OpenSession ... returns an open session with the database
 func OpenSession() *mgo.Session {
 	dialInfo := &mgo.DialInfo{
-		Addrs: []string{os.Getenv("DB_PREFIX0"),
+		Addrs: []string{
+			os.Getenv("DB_PREFIX0"),
 			os.Getenv("DB_PREFIX1"),
-			os.Getenv("DB_PREFIX1")},
+			os.Getenv("DB_PREFIX1"),
+		},
 		Database: os.Getenv("DB_AUTHDB"),
 		Username: os.Getenv("DB_USER"),
 		Password: os.Getenv("DB_PASS"),
@@ -33,9 +38,4 @@ func OpenSession() *mgo.Session {
 	}
 
 	return session
-}
-
-//CloseSession ... closes the session with the db
-func CloseSession(session *mgo.Session) {
-	session.Close()
 }

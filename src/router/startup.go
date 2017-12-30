@@ -5,20 +5,33 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/gorilla/mux"
+
 	"github.com/Fishdigger/quote-generator/src/services"
 )
 
 // Startup all routes in the api
 func Startup() {
-	services.QuoteRegisterRoutes()
+	r := mux.NewRouter()
+
+	services.QuotesRegisterRoutes(r)
+
+	http.Handle("/", r)
 
 	// simple handle function example
-	http.HandleFunc("/", func(responseWriter http.ResponseWriter, request *http.Request) {
+	http.HandleFunc("/test2", func(responseWriter http.ResponseWriter, request *http.Request) {
 		responseWriter.Write([]byte("Hello, World!!! from api"))
 	})
 
 	// template parsing handler example
 	http.Handle("/special", &helloWorldHandler{message: "Tenting this!!!"})
+
+	// simple handle function example
+	http.HandleFunc("/test", testHandler)
+}
+
+func testHandler(responseWriter http.ResponseWriter, request *http.Request) {
+	responseWriter.Write([]byte("Hello, World!!! from test function"))
 }
 
 type helloWorldHandler struct {
